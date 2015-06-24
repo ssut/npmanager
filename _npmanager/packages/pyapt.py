@@ -1,0 +1,3 @@
+
+class PyAptPackage(object):
+    pass

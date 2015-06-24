@@ -1,0 +1,3 @@
+
+class PHPPackage(object):
+    pass

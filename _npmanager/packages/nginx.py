@@ -1,0 +1,3 @@
+
+class NginxPackage(object):
+    pass 

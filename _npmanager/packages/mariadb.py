@@ -1,0 +1,3 @@
+
+class MariadbPackage(object):
+    pass
