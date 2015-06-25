@@ -1,3 +1,4 @@
+from _npmanager.classes import Package
 
-class NginxPackage(object):
+class NginxPackage(Package):
     pass 

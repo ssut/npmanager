@@ -1,3 +1,4 @@
+from _npmanager.classes import Package
 
-class MariadbPackage(object):
+class MariadbPackage(Package):
     pass

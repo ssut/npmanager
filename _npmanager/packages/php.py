@@ -1,3 +1,4 @@
+from _npmanager.classes import Package
 
-class PHPPackage(object):
+class PHPPackage(Package):
     pass
