@@ -26,11 +26,8 @@ class Manager:
         packages = importlib.import_module(root)
         packages = inspect.getmembers(packages, inspect.ismodule)
         for name, package in packages:
-            module = '{}.{}'.format(root, name)
-            cls, _ = inspect.getmembers(package,
-                lambda member: member.__module__ == member and \
-                               inspect.isclass(member))
-            print(cls)
+            _, cls = inspect.getmembers(package, inspect.isclass)[0]
+            self.packages[name] = cls()
 
     def check_env(self):
         # check for root user
@@ -48,6 +45,7 @@ class Manager:
         pyapt = cmdutils.which('/usr/bin/add-apt-repository')
         if not pyapt:
             print(messages.INFO.INSTALL_PYAPT)
+            self.packages.get('pyapt').install()
 
 
 
