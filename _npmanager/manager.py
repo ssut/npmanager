@@ -34,7 +34,7 @@ class Manager:
         euid = os.geteuid()
         # check for package manager (apt)
         aptitude = cmdutils.which('/usr/bin/apt-get') and \
-                   cmdutils.which('/usr/bin-aptitude')
+                   cmdutils.which('/usr/bin/aptitude')
         if euid != 0:
             print(messages.FATAL.NOT_ROOT)
             self._exit(1)
