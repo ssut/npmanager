@@ -2,7 +2,6 @@
 npmanager manager module
 """
 from __future__ import print_function
-import configparser
 import importlib
 import inspect
 import sys
