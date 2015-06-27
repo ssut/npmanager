@@ -1,46 +1,76 @@
+# pylint: disable=C0111,R0201,C0325
 """
 classes for npmanager
 """
-import subprocess
 import shlex
 import sys
+import select
 import os
+from functools import wraps
+from subprocess import Popen, PIPE, STDOUT
+
+from _npmanager.utils import commandutils as cmdutils
+
 
 class Package(object):
     COMMAND = ''
 
     def __init__(self):
-        pass
+        self.process = None
 
-    def write(self):
-        pass
+    def write(self, inp):
+        assert self.process
+        self.process.stdin.write(inp)
+        inp = inp.replace('\n', '\\n')
+        sys.stdout.write(' \033[1m[send a key: {}]\033[0m'.format(inp))
+        sys.stdout.flush()
+
+    def lprint(self, text):
+        cols, _ = cmdutils.termsize()
+        print('-' * cols)
+        print(text)
+        print('-' * cols)
+
+    def line_receiver(self, line):
+        raise NotImplementedError('`line_receiver` method should be implemented!')
 
     def execute(self):
-        gen = self.call()
-        while 1:
-            gen.next()
+        self.lprint('Info: execute the following command: {}'.format(self.COMMAND))
+        
+        try:
+            gen = self.call()
+            while 1:
+                line = gen.next()
+                try:
+                    self.line_receiver(line)
+                except NotImplementedError as exc:
+                    print('Error: {}'.format(exc))
+                    self.process.terminate()
+                    raise StopIteration()
+        except KeyboardInterrupt:
+            self.process.terminate()
+        except StopIteration:
+            pass
 
     def call(self):
         command = self.COMMAND
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE,
-                                   stdin=subprocess.PIPE, bufsize=0,
-                                   preexec_fn=os.setsid)
+        self.process = Popen(command, shell=True, stdin=PIPE, stdout=PIPE, \
+            stderr=STDOUT, close_fds=True)
+        
         while 1:
             line = ''
             while 1:
-                char = process.stdout.read(1)
+                if self.process.poll() is not None:
+                    raise StopIteration()
+                char = self.process.stdout.read(1)
                 line += char
                 if char == ':' or char == '?' or char == '\n':
                     break
 
             sys.stdout.write(line)
             sys.stdout.flush()
-            poll = process.poll()
-            if poll is None:
-                process.wait()
-            elif poll is not None:
+            poll = self.process.poll()
+            if poll is not None:
                 raise StopIteration()
             else:
                 yield line
-
-
