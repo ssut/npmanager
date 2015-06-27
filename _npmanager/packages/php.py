@@ -15,7 +15,7 @@ class PHPPackage(Package):
         val = super(PHPPackage, self).select()
         repo = self.SELECT.get('options')[val].get('repo')
         self.COMMAND = 'add-apt-repository {} -y;'.format(repo)
-        self.COMMAND += ('apt-get update;'
+        self.COMMAND += ('apt-get update > /dev/null;'
                          'apt-get install build-essential gcc g++ -y;'
                          'apt-get install libcurl3-openssl-dev -y;'
                          'apt-get install libpcre3 libpcre3-dev -y;'
