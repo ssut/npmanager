@@ -17,7 +17,9 @@ class NginxPackage(Package):
         repo = self.SELECT.get('options')[val].get('repo')
         self.COMMAND = 'add-apt-repository {} -y;'.format(repo)
         self.COMMAND += ('apt-get update > /dev/null;'
-                         'apt-get install nginx -y')
+                         'apt-get install nginx -y;'
+                         'mkdir -p /var/www/html;'
+                         'chmod 755 /var/www/html')
 
 
     def line_receiver(self, line):
