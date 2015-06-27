@@ -17,7 +17,8 @@ class Package(object):
 
     def execute(self):
         gen = self.call()
-        
+        while 1:
+            gen.next()
 
     def call(self):
         command = self.COMMAND
@@ -34,8 +35,11 @@ class Package(object):
 
             sys.stdout.write(line)
             sys.stdout.flush()
-            if process.poll() is not None:
-                break
+            poll = process.poll()
+            if poll is None:
+                process.wait()
+            elif poll is not None:
+                raise StopIteration()
             else:
                 yield line
 
