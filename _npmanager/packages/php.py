@@ -37,7 +37,7 @@ class PHPPackage(Package):
                          'apt-get install php-apc -y --force-yes;'
                          'rm -rf /etc/nginx/sites-available/;'
                          'rm -rf /etc/nginx/sites-enabled/;'
-                         'mkdir /etc/nginx/conf.d')
+                         'mkdir /etc/nginx/conf.d > /dev/null')
 
     def line_receiver(self, line):
         if '] :' in line or '] ?' in line:
