@@ -40,6 +40,14 @@ def termsize():
         height, width = map(int, size)
     return (width, height, )
 
+def lsb_release():
+    """
+    Get Linux Standard Base (LSB) information
+    """
+    data = subprocess.check_output(['lsb_release', '-a']).split()
+    _os, codename = data[2], data[-1]
+    return (_os, codename, )
+
 def update_aptitude():
     """
     Update apt-cache
