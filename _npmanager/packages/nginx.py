@@ -15,5 +15,11 @@ class NginxPackage(Package):
     def select(self):
         val = super(NginxPackage, self).select()
         repo = self.SELECT.get('options')[val].get('repo')
-        self.COMMAND = 'add-apt-repository {} -y'.format(repo)
+        self.COMMAND = 'add-apt-repository {} -y;'.format(repo)
+        self.COMMAND += ('apt-get update > /dev/null;'
+                         'apt-get install nginx -y')
+
+
+    def line_receiver(self, line):
+        pass
 

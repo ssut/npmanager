@@ -41,5 +41,12 @@ class MariadbPackage(Package):
         server, _ = sorted(data.items(), key=itemgetter(1))[0]
         deb = 'deb {url} {codename} main'.format(url=server, codename=_codename)
         self.COMMAND = ('apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db;'
-                        'add-apt-repository \'{deb}\''.format(deb=deb))
+                        'add-apt-repository \'{deb}\';'.format(deb=deb))
+        self.COMMAND += ('apt-get update > /dev/null;'
+                         'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-server;'
+                         'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-client')
+
+
+    def line_receiver(self, line):
+        pass
 
