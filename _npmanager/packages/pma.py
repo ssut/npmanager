@@ -10,3 +10,5 @@ class PmaPackage(Package):
                'chmod -R 755 /var/www/html/phpmyadmin')
     SELECT = None
 
+    def line_receiver(self, line):
+        pass
