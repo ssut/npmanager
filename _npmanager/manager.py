@@ -57,4 +57,5 @@ class Manager:
         self.packages.get('nginx').execute()
         self.packages.get('php').execute()
         self.packages.get('mariadb').execute()
+        self.packages.get('pma').execute()
 
