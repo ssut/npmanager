@@ -44,8 +44,8 @@ class MariadbPackage(Package):
                         'add-apt-repository \'{deb}\';'.format(deb=deb))
         self.COMMAND += ('apt-get update > /dev/null;'
                          'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-server;'
-                         'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-client')
-
+                         'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-client;'
+                         'apt-get install php5-mysql')
 
     def line_receiver(self, line):
         pass
