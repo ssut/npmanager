@@ -17,7 +17,7 @@ class Package(object):
 
     def execute(self):
         gen = self.call()
-        gen.next()
+        
 
     def call(self):
         command = self.COMMAND
@@ -37,7 +37,6 @@ class Package(object):
             if process.poll() is not None:
                 break
             else:
-                result = yield
-                print(result)
+                yield line
 
 
