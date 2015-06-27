@@ -10,13 +10,20 @@ from functools import wraps
 from subprocess import Popen, PIPE, STDOUT
 
 from _npmanager.utils import commandutils as cmdutils
-
+from _npmanager.utils import screen
 
 class Package(object):
     COMMAND = ''
+    SELECT = {}
 
     def __init__(self):
         self.process = None
+
+    def select(self):
+        val = screen.select(self.SELECT)
+        if val == len(self.SELECT['options']):
+            sys.exit(0)
+        return val
 
     def write(self, inp):
         assert self.process
