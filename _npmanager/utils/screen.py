@@ -4,6 +4,8 @@ A simple menu system using python for the Terminal
 Reference: https://gist.github.com/abishur/2482046
 """
 import curses
+import os
+import sys
 
 # initializes a new window for capturing key presses
 screen = curses.initscr()
@@ -16,7 +18,7 @@ curses.start_color()
 # capture input from keypad
 screen.keypad(1)
 
-def select(data):
+def _select(data):
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     h = curses.color_pair(1)
     n = curses.A_NORMAL
@@ -31,7 +33,7 @@ def select(data):
         if pos != oldpos:
             oldpos = pos
             screen.border(0)
-            screen.addstr(2, 3, data['title'], curses.A_STANDOUT)
+            screen.addstr(2, 3, '{}{}'.format(data['title'], ' ' * 10), curses.A_STANDOUT)
             screen.addstr(4, 3, data['subtitle'], curses.A_BOLD)
 
             # display all menu items
@@ -61,5 +63,15 @@ def select(data):
             else: pos = optioncount
 
     curses.endwin()
+    os.system('clear')
+    return pos
 
-    print(pos)
+def select(data):
+    pos = None
+    try:
+        pos = _select(data)
+    except KeyboardInterrupt:
+        curses.endwin()
+        sys.exit(0)
+
+    return pos
