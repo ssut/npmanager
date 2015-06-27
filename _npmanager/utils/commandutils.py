@@ -45,7 +45,7 @@ def lsb_release():
     Get Linux Standard Base (LSB) information
     """
     data = subprocess.check_output(['lsb_release', '-a']).split()
-    _os, codename = data[2], data[-1]
+    _os, codename = data[2].lower(), data[-1].lower()
     return (_os, codename, )
 
 def update_aptitude():
