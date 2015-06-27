@@ -2,6 +2,7 @@
 command utils for npmanager
 """
 import os
+import sys
 import subprocess
 
 def which(program):
@@ -37,7 +38,13 @@ def termsize():
     with open('/dev/tty') as tty:
         size = subprocess.check_output(['stty', 'size'], stdin=tty).split()
         height, width = map(int, size)
-
     return (width, height, )
 
+def update_aptitude():
+    """
+    Update apt-cache
+    """
+    cmd = 'apt-get update'
+    ret = subprocess.call(cmd, shell=True, stdout=sys.stdout, stderr=sys.stderr)
+    return ret
 
