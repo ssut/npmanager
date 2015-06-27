@@ -48,17 +48,21 @@ class PHPPackage(Package):
         nginx = '/etc/nginx/nginx.conf'
         nginx_php = '/etc/nginx/php'
         nginx_local = '/etc/nginx/conf.d/localhost'
+        nginx_index = '/var/www/html/index.html'
         shutil.copy(os.path.join(self.basepath, 'confs', 'nginx.conf'), nginx)
         shutil.copy(os.path.join(self.basepath, 'confs', 'php.conf'), nginx_php)
         shutil.copy(os.path.join(self.basepath, 'confs', 'localhost.conf'), nginx_local)
+        shutil.copy(os.path.join(self.basepath, 'confs', 'index.html'), nginx_index)
         try:
             if PY3:
                 os.chmod(nginx, 0o644)
                 os.chmod(nginx_php, 0o644)
                 os.chmod(nginx_local, 0o644)
+                os.chmod(nginx_index, 0o644)
             else:
                 os.chmod(nginx, 436)  # 436 means 644
                 os.chmod(nginx_php, 436)
                 os.chmod(nginx_local, 436)
+                os.chmod(nginx_index, 436)
         except:
             pass

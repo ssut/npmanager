@@ -45,7 +45,8 @@ class MariadbPackage(Package):
         self.COMMAND += ('apt-get update > /dev/null;'
                          'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-server;'
                          'DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" -q -y install mariadb-client;'
-                         'apt-get install php5-mysql -y --force-yes')
+                         'apt-get install php5-mysql -y --force-yes;'
+                         'service nginx restart')
 
     def line_receiver(self, line):
         pass

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx w/ npmanager!</title>
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: 'Lato', sans-serif;
+    }
+    h1, h2, h3 { margin: 5px 0; }
+    p { margin: 10px 0; }
+    a, a:link { color: #4099FF; }
+    .red { color: red; }
+    .blue { color: blue; }
+    div.highlight {
+        padding: 10px;
+        overflow: auto;
+        line-height: 1.45;
+        background-color: #f7f7f7;
+        border-radius: 3px;
+        font-size: 0.95em;
+        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        word-break: normal;
+    }
+    div.highlight span.comment {
+        color: #969896;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx w/ npmanager!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working on your server properly. Some further configuration is required to use as your own!</p>
+
+<p><b>NGINX</b>: For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a></p>
+<p><b>PHP</b>: For online documentation and support please refer to
+<a href="http://php.net/">php.net</a></p>
+<p><b>MariaDB</b>: For online documentation and support please refer to
+<a href="http://mariadb.org/">mariadb.org</a></p>
+
+<p><em>Thank you for using <a href="https://github.com/ssut/npmanager">npmanager</a>.</em></p>
+
+<br>
+
+<h3>Here are the details you need to know to go ahead with secure:</h3>
+
+<p><b><span class="red">(!)</span> Set your MariaDB password</b></p>
+<p>
+    <a href="/phpmyadmin" target="_blank">please click here</a> to set it now with phpMyAdmin.<br>
+    The default <em>root</em> account password is <b>not set</b>, just blank. <a href="http://trantor.synology.me/ruthpozuelo/change-password-sql-database-phpmyadmin/">[tip]</a>
+</p>
+<p><b><span class="blue">(!)</span> Let you know how to start/stop/reload daemons.</b></p>
+<p>
+    <div class="highlight">
+        <span class="comment"># Start NGINX</span><br>
+        $ sudo npmanager start nginx<br>
+        <span class="comment"># Stop NGINX</span><br>
+        $ sudo npmanager stop nginx<br>
+        <span class="comment"># Reload NGINX</span><br>
+        $ sudo npmanager reload nginx<br>
+        <span class="comment"># Restart NGINX</span><br>
+        $ sudo npmanager restart nginx<br>
+        <br>
+        <span class="comment"># Start PHP</span><br>
+        $ sudo npmanager start php<br>
+        <span class="comment"># Stop PHP</span><br>
+        $ sudo npmanager stop php<br>
+        <span class="comment"># Reload PHP</span><br>
+        $ sudo npmanager reload php<br>
+        <span class="comment"># Restart PHP</span><br>
+        $ sudo npmanager restart php<br>
+        <br>
+        <span class="comment"># Start MariaDB</span><br>
+        $ sudo npmanager start mariadb<br>
+        <span class="comment"># Stop MariaDB</span><br>
+        $ sudo npmanager stop mariadb<br>
+        <span class="comment"># Reload MariaDB</span><br>
+        $ sudo npmanager reload mariadb<br>
+        <span class="comment"># Restart MariaDB</span><br>
+        $ sudo npmanager restart mariadb<br>
+    </div>
+</p>
+
+<p><b><span class="blue">(!)</span> Where is configuration files located?</b></p>
+<p>
+    <div class="highlight">
+        <span class="comment"># NGINX</span><br>
+        $ cd /etc/nginx<br>
+        $ vim nginx.conf<br>
+        <span class="comment"># NGINX Web</span><br>
+        $ cd /etc/nginx/conf.d<br>
+        $ vim localhost<br>
+        <span class="comment"># PHP</span><br>
+        $ cd /etc/php5/fpm<br>
+        $ vim php.ini<br>
+        <span class="comment"># MariaDB</span><br>
+        $ cd /etc/mysql<br>
+        $ vim my.cnf
+    </div>
+<p>
+
+<p><b><span class="blue">(!)</span> How to upgrade daemons when there's a new version released?</b></p>
+<p>
+    <div class="highlight">
+        $ sudo apt-get update<br>
+        $ sudo apt-get upgrade
+    </div>
+    <p>
+    Yeah, It's all you need to do :)
+    </p>
+<p>
+</body>
+</html>
