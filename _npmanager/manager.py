@@ -4,10 +4,12 @@ npmanager manager module
 from __future__ import print_function
 import importlib
 import inspect
-import sys
 import os
+import sys
+import time
 
 from _npmanager.utils import commandutils as cmdutils
+from _npmanager.utils import screen
 from _npmanager import messages
 
 class Manager:
@@ -42,10 +44,17 @@ class Manager:
             print(messages.WARN.FOR_DEBIAN)
 
     def install(self):
+        self.packages['nginx'].select()
+        self.packages['php'].select()
+        self.packages['mariadb'].select()
+
+        time.sleep(1)
         pyapt = cmdutils.which('/usr/bin/add-apt-repository')
         if not pyapt:
             print(messages.INFO.INSTALL_PYAPT)
             self.packages.get('pyapt').execute()
 
-
+        self.packages.get('nginx').execute()
+        self.packages.get('php').execute()
+        self.packages.get('mariadb').execute()
 
