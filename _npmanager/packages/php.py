@@ -1,4 +1,8 @@
+import os
+import shutil
+
 from _npmanager.classes import Package
+from _npmanager.constants import PY3
 
 class PHPPackage(Package):
     COMMAND = ''
@@ -10,6 +14,10 @@ class PHPPackage(Package):
             {'title': 'PHP 5.5 (by ondrej)', 'repo': 'ppa:ondrej/php5'}
         ]
     }
+
+    def __init__(self):
+        super(PHPPackage, self).__init__()
+        self.basepath = os.path.dirname(os.path.abspath(__file__))
 
     def select(self):
         val = super(PHPPackage, self).select()
@@ -26,8 +34,31 @@ class PHPPackage(Package):
                          'apt-get install php-pear -y;'
                          'apt-get purge apache2 libapache2-mod-php5 -y;'
                          'apt-get install php5-apcu -y;'
-                         'apt-get install php-apc -y;')
+                         'apt-get install php-apc -y;'
+                         'rm -rf /etc/nginx/sites-available/;'
+                         'rm -rf /etc/nginx/sites-enabled/;'
+                         'mkdir /etc/nginx/conf.d')
 
     def line_receiver(self, line):
         if '] :' in line or '] ?' in line:
             self.write('\n')
+
+    def execute(self):
+        super(PHPPackage, self).execute()
+        nginx = '/etc/nginx/nginx.conf'
+        nginx_php = '/etc/nginx/php'
+        nginx_local = '/etc/nginx/conf.d/localhost'
+        shutil.copy(os.path.join(self.basepath, 'confs', 'nginx.conf'), nginx)
+        shutil.copy(os.path.join(self.basepath, 'confs', 'php.conf'), nginx_php)
+        shutil.copy(os.path.join(self.basepath, 'confs', 'localhost.conf'), nginx_local)
+        try:
+            if PY3:
+                os.chmod(nginx, 0o644)
+                os.chmod(nginx_php, 0o644)
+                os.chmod(nginx_local, 0o644)
+            else:
+                os.chmod(nginx, 436)  # 436 means 644
+                os.chmod(nginx_php, 436)
+                os.chmod(nginx_local, 436)
+        except:
+            pass
