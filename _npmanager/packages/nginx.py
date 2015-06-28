@@ -3,7 +3,7 @@ from _npmanager.classes import Package
 
 class NginxPackage(Package):
     COMMAND = ''
-    SERVICE = '/etc/init.d/nginx'
+    SERVICE = 'service nginx'
     SELECT = {
         'title': 'Choose the version of NGINX',
         'subtitle': 'WARNING: Do not use development releases on production systems!',

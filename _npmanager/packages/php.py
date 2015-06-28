@@ -6,7 +6,7 @@ from _npmanager.constants import PY3
 
 class PHPPackage(Package):
     COMMAND = ''
-    SERVICE = '/etc/init.d/php5-fpm'
+    SERVICE = 'service php5-fpm'
     SELECT = {
         'title': 'Choose the version of PHP',
         'subtitle': 'WARNING: Some PHP applications may not be supported by the latest version of PHP.',
