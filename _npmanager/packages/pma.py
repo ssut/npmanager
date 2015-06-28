@@ -10,7 +10,7 @@ class PmaPackage(Package):
                'chmod -R 755 /var/www/html/phpmyadmin;'
                'rm /var/www/html/pma.zip;'
                'mv /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php;'
-               "sed -i \"s/AllowNoPassword\'] \= false/AllowNoPassowrd\'] \= true/g\" /var/www/html/phpmyadmin/config.inc.php;"
+               "sed -i \"s/AllowNoPassword\'] \= false/AllowNoPassword\'] \= true/g\" /var/www/html/phpmyadmin/config.inc.php;"
                'user=`logname`; chown -R $user:$user /var/www/html')
     SELECT = None
 
