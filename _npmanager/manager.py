@@ -9,7 +9,6 @@ import sys
 import time
 
 from _npmanager.utils import commandutils as cmdutils
-from _npmanager.utils import screen
 from _npmanager import messages
 
 class Manager:
@@ -59,3 +58,14 @@ class Manager:
         self.packages.get('mariadb').execute()
         self.packages.get('pma').execute()
 
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def reload(self):
+        pass
+
+    def restart(self):
+        pass
