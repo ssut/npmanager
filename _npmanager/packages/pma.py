@@ -6,7 +6,7 @@ class PmaPackage(Package):
                'echo "$releases" | egrep -o "/phpmyadmin/phpmyadmin/archive/RELEASE_(.+)\.zip" | '
                'wget --base="http://github.com" -i - -O /var/www/html/pma.zip;'
                'unzip -q -o /var/www/html/pma.zip -d /var/www/html/;'
-               'mv /var/www/html/php* /var/www/html/phpmyadmin;'
+               'mv /var/www/html/phpmy* /var/www/html/phpmyadmin;'
                'chmod -R 755 /var/www/html/phpmyadmin;'
                'rm /var/www/html/pma.zip;'
                'mv /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php;'
