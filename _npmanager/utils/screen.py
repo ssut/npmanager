@@ -7,17 +7,6 @@ import curses
 import os
 import sys
 
-# initializes a new window for capturing key presses
-screen = curses.initscr()
-# disables automatic echoing of key presses
-curses.noecho()
-# disables line buffering
-curses.cbreak()
-# lets you use colors when highlighting selected option
-curses.start_color()
-# capture input from keypad
-screen.keypad(1)
-
 def _select(data):
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     h = curses.color_pair(1)
@@ -67,6 +56,17 @@ def _select(data):
     return pos
 
 def select(data):
+    # initializes a new window for capturing key presses
+    screen = curses.initscr()
+    # disables automatic echoing of key presses
+    curses.noecho()
+    # disables line buffering
+    curses.cbreak()
+    # lets you use colors when highlighting selected option
+    curses.start_color()
+    # capture input from keypad
+    screen.keypad(1)
+
     pos = None
     try:
         pos = _select(data)
