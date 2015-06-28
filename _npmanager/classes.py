@@ -84,13 +84,13 @@ class Package(object):
                 yield line
 
     def start(self):
-        ret = call('{} {}'.format(self.SERVICE, 'start'), shell=True)
+        _ = call('{} {}'.format(self.SERVICE, 'start'), shell=True)
 
     def stop(self):
-        ret = call('{} {}'.format(self.SERVICE, 'stop'), shell=True)
+        _ = call('{} {}'.format(self.SERVICE, 'stop'), shell=True)
 
     def reload(self):
-        ret = call('{} {}'.format(self.SERVICE, 'reload'), shell=True)
+        _ = call('{} {}'.format(self.SERVICE, 'reload'), shell=True)
 
     def restart(self):
-        ret = call('{} {}'.format(self.SERVICE, 'restart'), shell=True)
+        _ = call('{} {}'.format(self.SERVICE, 'restart'), shell=True)
