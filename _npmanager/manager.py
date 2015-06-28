@@ -58,14 +58,14 @@ class Manager:
         self.packages.get('mariadb').execute()
         self.packages.get('pma').execute()
 
-    def start(self):
-        pass
+    def start(self, daemon):
+        self.packages.get(daemon).start()
 
-    def stop(self):
-        pass
+    def stop(self, daemon):
+        self.packages.get(daemon).stop()
 
-    def reload(self):
-        pass
+    def reload(self, daemon):
+        self.packages.get(daemon).reload()
 
-    def restart(self):
-        pass
+    def restart(self, daemon):
+        self.packages.get(daemon).restart()

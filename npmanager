@@ -1,18 +1,52 @@
 #!/usr/bin/env python
+# encoding: utf-8
 import argparse
 import sys
 
+from _npmanager.constants import PY3
 from _npmanager.manager import Manager
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser('npmanager')
+    sp = parser.add_subparsers(dest='command', help='available commands')
+    
+    commands = ['start', 'stop', 'reload', 'restart']
+    choices = ('nginx', 'php', 'mariadb')
+    install = sp.add_parser('install', help='Install NGINX, PHP and MariaDB in 10 mins!')
+    for command in commands:
+        cmd = sp.add_parser(command, help='{} daemon'.format(command))
+        cmd.add_argument('daemon', nargs='?', choices=choices)
+
     args = parser.parse_args()
-
     manager = Manager()
-    manager.install()
 
+    cmd = args.command
+    daemon = args.daemon if 'daemon' in args else None
+    method = None
+
+    if cmd == 'install':
+        _input = input if PY3 else raw_input
+        try:
+            _ = _input('If you want to continue press RETURN(Enter) key or CTRL + C to exit: ')
+        except KeyboardInterrupt:
+            sys.exit(0)
+        else:
+            manager.install()
+    elif daemon is None:
+        print('Warning: You must specify at least one of the following parameters: '
+              'nginx, php, mariadb')
+        sys.exit(1)
+    elif cmd == 'start':
+        method = manager.start
+    elif cmd == 'stop':
+        method = manager.stop
+    elif cmd == 'reload':
+        method = manager.reload
+    elif cmd == 'restart':
+        method = manager.restart
+
+    method(daemon)
     sys.exit(0)
-
 
 if __name__ == '__main__':
     main()

@@ -7,13 +7,14 @@ import sys
 import select
 import os
 from functools import wraps
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import call, Popen, PIPE, STDOUT
 
 from _npmanager.utils import commandutils as cmdutils
 from _npmanager.utils import screen
 
 class Package(object):
     COMMAND = ''
+    SERVICE = ''
     SELECT = {}
 
     def __init__(self):
@@ -81,3 +82,15 @@ class Package(object):
                 raise StopIteration()
             else:
                 yield line
+
+    def start(self):
+        ret = call('{} {}'.format(self.SERVICE, 'start'), shell=True)
+
+    def stop(self):
+        ret = call('{} {}'.format(self.SERVICE, 'stop'), shell=True)
+
+    def reload(self):
+        ret = call('{} {}'.format(self.SERVICE, 'reload'), shell=True)
+
+    def restart(self):
+        ret = call('{} {}'.format(self.SERVICE, 'restart'), shell=True)

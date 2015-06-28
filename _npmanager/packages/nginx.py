@@ -3,6 +3,7 @@ from _npmanager.classes import Package
 
 class NginxPackage(Package):
     COMMAND = ''
+    SERVICE = '/etc/init.d/nginx'
     SELECT = {
         'title': 'Choose the version of NGINX',
         'subtitle': 'WARNING: Do not use development releases on production systems!',
@@ -24,4 +25,3 @@ class NginxPackage(Package):
 
     def line_receiver(self, line):
         pass
-

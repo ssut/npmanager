@@ -6,6 +6,7 @@ from _npmanager.utils import networkutils as netutils
 
 class MariadbPackage(Package):
     COMMAND = ''
+    SERVICE = '/etc/init.d/mysql'
     SELECT = {
         'title': 'Choose the version of MariaDB',
         'subtitle': 'INFO: Currently, the beta releases of MariaDB is not provided by repos.',
