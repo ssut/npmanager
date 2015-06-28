@@ -2,6 +2,7 @@
 # encoding: utf-8
 import argparse
 import sys
+import timeit
 
 from _npmanager.constants import PY3
 from _npmanager.manager import Manager
@@ -31,7 +32,13 @@ def main():
         except KeyboardInterrupt:
             sys.exit(0)
         else:
+            start = timeit.default_timer()
             manager.install()
+            duration = timeit.default_timer() - start
+            mins, secs = divmod(duration, 60)
+            duration = '{:02d}:{:02d}'.format(int(mins), int(secs))
+            print('--- Finished! duration: {} ---'.format(duration))
+            sys.exit(0)
     elif daemon is None:
         print('Warning: You must specify at least one of the following parameters: '
               'nginx, php, mariadb')
