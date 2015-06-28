@@ -62,7 +62,7 @@ class Manager:
         self.packages.get('mariadb').execute()
         self.packages.get('pma').execute()
 
-        with open('/etc/npmanager.conf', 'w', encoding='utf-8') as fd:
+        with open('/etc/npmanager.conf', 'w') as fd:
             fd.write('\n')
 
     def start(self, daemon):
