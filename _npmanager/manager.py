@@ -43,6 +43,10 @@ class Manager:
             print(messages.WARN.FOR_DEBIAN)
 
     def install(self):
+        if os.path.exists('/etc/npmanager.conf'):
+            print(messages.FATAL.ALREADY_INSTALLED)
+            sys.exit(0)
+
         self.packages['nginx'].select()
         self.packages['php'].select()
         self.packages['mariadb'].select()
@@ -57,6 +61,9 @@ class Manager:
         self.packages.get('php').execute()
         self.packages.get('mariadb').execute()
         self.packages.get('pma').execute()
+
+        with open('/etc/npmanager.conf', 'w', encoding='utf-8') as fd:
+            fd.write('\n')
 
     def start(self, daemon):
         self.packages.get(daemon).start()
