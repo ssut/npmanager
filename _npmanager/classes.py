@@ -94,3 +94,6 @@ class Package(object):
 
     def restart(self):
         _ = call('{} {}'.format(self.SERVICE, 'restart'), shell=True)
+
+    def status(self):
+        _ = call('{} {}'.format(self.SERVICE, 'status'), shell=True)

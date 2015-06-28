@@ -76,3 +76,6 @@ class Manager:
 
     def restart(self, daemon):
         self.packages.get(daemon).restart()
+
+    def status(self, daemon):
+        self.packages.get(daemon).status()

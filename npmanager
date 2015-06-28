@@ -44,6 +44,8 @@ def main():
         method = manager.reload
     elif cmd == 'restart':
         method = manager.restart
+    elif cmd == 'status':
+        method = manager.status
 
     method(daemon)
     sys.exit(0)
