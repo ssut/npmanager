@@ -10,7 +10,7 @@ def main():
     parser = argparse.ArgumentParser('npmanager')
     sp = parser.add_subparsers(dest='command', help='available commands')
     
-    commands = ['start', 'stop', 'reload', 'restart']
+    commands = ['start', 'stop', 'reload', 'restart', 'status']
     choices = ('nginx', 'php', 'mariadb')
     install = sp.add_parser('install', help='Install NGINX, PHP and MariaDB in 10 mins!')
     for command in commands:
