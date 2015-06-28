@@ -7,7 +7,12 @@ import curses
 import os
 import sys
 
+from _npmanager.constants import PY3
+
+screen = None
+
 def _select(data):
+    global screen
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     h = curses.color_pair(1)
     n = curses.A_NORMAL
@@ -40,8 +45,11 @@ def _select(data):
             screen.refresh()
 
         x = screen.getch()
-        if x >= unichr(1) and x <= unichr(int(optioncount + 1)):
-            pos = x - unichr(0) - 1 # convert keypress back to a number, then subtract 1 to get index
+        _x1 = ord('1') if PY3 else unichr(1)
+        _x2 = ord(str(optioncount + 1)) if PY3 else unichr(int(optioncount + 1))
+        _x3 = ord('0') if PY3 else unichr(0)
+        if x >= _x1 and x <= _x2:
+            pos = x - _x3 - 1 # convert keypress back to a number, then subtract 1 to get index
         elif x == 258: # down arrow
             if pos < optioncount:
                 pos += 1
@@ -56,6 +64,7 @@ def _select(data):
     return pos
 
 def select(data):
+    global screen
     # initializes a new window for capturing key presses
     screen = curses.initscr()
     # disables automatic echoing of key presses
