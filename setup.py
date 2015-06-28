@@ -34,6 +34,7 @@ def install():
             'Topic :: System :: System Shells',
             'Topic :: System :: Systems Administration',
         ],
+        include_package_data=True
     )
 
 if __name__ == '__main__':
