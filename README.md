@@ -1,6 +1,7 @@
 # npmanager
 
 [![PyPI version](https://badge.fury.io/py/npmanager.svg)](http://badge.fury.io/py/npmanager)
+[![Code Climate](https://codeclimate.com/github/ssut/npmanager/badges/gpa.svg)](https://codeclimate.com/github/ssut/npmanager)
 
 ![](http://i.imgur.com/QkllAZ1.png)
 
